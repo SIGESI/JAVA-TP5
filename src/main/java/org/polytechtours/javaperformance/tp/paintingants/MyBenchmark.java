@@ -31,14 +31,50 @@
 
 package org.polytechtours.javaperformance.tp.paintingants;
 
-import org.openjdk.jmh.annotations.Benchmark;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 
+
+
+import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Measurement;
+import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Param;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.TearDown;
+import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.infra.Blackhole;
+import org.openjdk.jmh.runner.Runner;
+import org.openjdk.jmh.runner.RunnerException;
+import org.openjdk.jmh.runner.options.Options;
+import org.openjdk.jmh.runner.options.OptionsBuilder;
+
+
+@BenchmarkMode(Mode.AverageTime)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
+@State(Scope.Benchmark)
 public class MyBenchmark {
 
-    @Benchmark
-    public void testMethod() {
-        // This is a demo/sample template for building your JMH benchmarks. Edit as needed.
-        // Put your benchmark code here.
+	
+	
+	
+	public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include(MyBenchmark.class.getSimpleName())
+                .forks(2)
+                .warmupIterations(5)
+                .measurementIterations(5)
+                .build();
+
+        new Runner(opt).run();
     }
 
+	
+	
+	
 }
