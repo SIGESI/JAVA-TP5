@@ -54,27 +54,30 @@ import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
-
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @State(Scope.Benchmark)
 public class MyBenchmark {
 
+	//@Setup 
+	public PaintingAnts paintingAnts;
+	//public CPainting cp;
+    @Benchmark
+    public void PaintingAnts() {
+		paintingAnts.start();
 	
-	
+	}
+	 
 	
 	public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
                 .include(MyBenchmark.class.getSimpleName())
-                .forks(2)
+                .forks(1)
                 .warmupIterations(5)
                 .measurementIterations(5)
                 .build();
 
         new Runner(opt).run();
     }
-
-	
-	
 	
 }
